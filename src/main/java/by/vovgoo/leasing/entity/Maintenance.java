@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -30,6 +33,14 @@ public class Maintenance extends EditableEntity<Long> {
 
     @NotBlank
     private String serviceName;
+
+    @NotBlank
+    @DateTimeFormat
+    private LocalDateTime startDate;
+
+    @NotBlank
+    @DateTimeFormat
+    private LocalDateTime endDate;
 
 }
 

@@ -32,5 +32,7 @@ public class Payments extends EditableEntity<Long> {
     @Min(0)
     private Double amount;
 
+    @Enumerated(EnumType.STRING)
+    @NotBlank
     private PaymentMethod paymentMethod;
 }

@@ -42,6 +42,7 @@ public class Cars extends EditableEntity<Long> {
     private Double price;
 
     @NotBlank
+    @Enumerated(EnumType.STRING)
     private CarStatus carStatus;
 
     @NotBlank

@@ -56,6 +56,7 @@ public class User extends EditableEntity<Long> implements UserDetails {
     private String image;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Override

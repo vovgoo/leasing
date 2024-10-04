@@ -39,6 +39,7 @@ public class Rentals extends EditableEntity<Long> {
     private LocalDateTime endDate;
 
     @NotBlank
+    @Enumerated(EnumType.STRING)
     private RentalsStatus rentalsStatus;
 
 }

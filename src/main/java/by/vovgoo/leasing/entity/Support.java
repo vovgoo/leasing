@@ -4,13 +4,14 @@ import by.vovgoo.leasing.entity.baseEntity.EditableEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Data
-@Builder
+@SuperBuilder
 public class Support extends EditableEntity<Long> {
 
     @Id

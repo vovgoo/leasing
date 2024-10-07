@@ -1,4 +1,4 @@
-package by.vovgoo.leasing.dto;
+package by.vovgoo.leasing.dto.pages.MainPage;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class OrderPersonalDto {
+public class PriceRange {
 
-    private PaymentsDto payments;
+    private Double lowerBound;
 
+    private Double upperBound;
 }
+

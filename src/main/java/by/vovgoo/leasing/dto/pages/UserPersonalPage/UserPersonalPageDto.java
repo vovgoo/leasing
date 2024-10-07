@@ -1,21 +1,18 @@
-package by.vovgoo.leasing.dto;
+package by.vovgoo.leasing.dto.pages.UserPersonalPage;
 
-import by.vovgoo.leasing.entity.RentalsPersonal;
+import by.vovgoo.leasing.dto.pages.utils.PageResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.Page;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserPersonal {
+public class UserPersonalPageDto {
 
     private String image;
 
@@ -32,5 +29,5 @@ public class UserPersonal {
     private String address;
 
     @Builder.Default
-    PageResponse<RentalsPersonalDto> rentalsList = new PageResponse<>(Collections.emptyList(), new PageResponse.Metadata(0, 10, 0));;
+    PageResponse<UserPersonalPageRentalsDto> rentalsList = new PageResponse<>(Collections.emptyList(), new PageResponse.Metadata(0, 10, 0));
 }

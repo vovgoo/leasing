@@ -1,4 +1,4 @@
-package by.vovgoo.leasing.dto;
+package by.vovgoo.leasing.dto.pages.utils;
 
 import lombok.ToString;
 import lombok.Value;

@@ -1,15 +1,11 @@
 package by.vovgoo.leasing.service.impl;
 
-import by.vovgoo.leasing.dto.JwtAuthResponse;
-import by.vovgoo.leasing.dto.RentalsPersonalDto;
-import by.vovgoo.leasing.entity.RentalsPersonal;
-import by.vovgoo.leasing.dto.SignInRequest;
+import by.vovgoo.leasing.dto.auth.JwtAuthResponse;
+import by.vovgoo.leasing.dto.auth.SignInRequest;
 import by.vovgoo.leasing.dto.UserDto;
 import by.vovgoo.leasing.entity.User;
 import by.vovgoo.leasing.entity.enums.Role;
-import by.vovgoo.leasing.mapper.RentalsPersonalMapper;
 import by.vovgoo.leasing.mapper.UserMapper;
-import by.vovgoo.leasing.repositories.RentalsRepository;
 import by.vovgoo.leasing.repositories.UserRepository;
 import by.vovgoo.leasing.service.AuthService;
 import by.vovgoo.leasing.service.JwtService;
@@ -19,7 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -38,9 +34,12 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public UserDto signUp(UserDto userDto) {
+
         User user = userMapper.mapTo(userDto);
         user.setRole(Role.USER);
         user.setPasswordHash(passwordEncoder.encode(user.getPassword()));
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
         return Optional.of(user).map(userRepository::save).map(userMapper::mapFrom).orElseThrow();
     }
 

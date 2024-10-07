@@ -1,12 +1,8 @@
 package by.vovgoo.leasing.service;
 
-import by.vovgoo.leasing.dto.JwtAuthResponse;
-import by.vovgoo.leasing.dto.RentalsPersonalDto;
-import by.vovgoo.leasing.entity.RentalsPersonal;
-import by.vovgoo.leasing.dto.SignInRequest;
+import by.vovgoo.leasing.dto.auth.JwtAuthResponse;
+import by.vovgoo.leasing.dto.auth.SignInRequest;
 import by.vovgoo.leasing.dto.UserDto;
-
-import java.util.List;
 
 public interface AuthService {
 

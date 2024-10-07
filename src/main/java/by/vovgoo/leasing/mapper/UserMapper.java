@@ -20,6 +20,8 @@ public class UserMapper implements Mapper<User, UserDto> {
                 .address(object.getAddress())
                 .image(object.getImage())
                 .role(object.getRole())
+                .createdAt(object.getCreatedAt())
+                .updatedAt(object.getUpdatedAt())
                 .build();
     }
 
@@ -36,6 +38,8 @@ public class UserMapper implements Mapper<User, UserDto> {
                 .address(object.getAddress())
                 .image(object.getImage())
                 .role(object.getRole())
+                .createdAt(object.getCreatedAt())
+                .updatedAt(object.getUpdatedAt())
                 .build();
     }
 }

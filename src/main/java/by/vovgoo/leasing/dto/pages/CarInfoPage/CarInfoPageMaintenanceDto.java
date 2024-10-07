@@ -1,7 +1,5 @@
-package by.vovgoo.leasing.dto;
+package by.vovgoo.leasing.dto.pages.CarInfoPage;
 
-import by.vovgoo.leasing.entity.Cars;
-import by.vovgoo.leasing.entity.enums.RentalsStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,16 +11,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RentalsPersonalDto {
+public class CarInfoPageMaintenanceDto {
 
     private Long id;
 
-    private CarsDto cars;
+    private String serviceName;
 
     private LocalDateTime startDate;
 
     private LocalDateTime endDate;
-
-    private RentalsStatus rentalsStatus;
 
 }

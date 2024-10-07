@@ -1,41 +1,40 @@
 package by.vovgoo.leasing.mapper;
 
-import by.vovgoo.leasing.dto.RentalsDto;
-import by.vovgoo.leasing.entity.Rentals;
+import by.vovgoo.leasing.dto.MaintenanceDto;
+import by.vovgoo.leasing.entity.Maintenance;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class RentalsMapper implements Mapper<Rentals, RentalsDto> {
+public class MaintenanceMapper implements Mapper<Maintenance, MaintenanceDto> {
 
     private final CarsMapper carsMapper;
-
-    private final UserMapper userMapper;
-
     @Override
-    public Rentals mapTo(RentalsDto object) {
-        return Rentals.builder()
+    public Maintenance mapTo(MaintenanceDto object) {
+        return Maintenance.builder()
                 .id(object.getId())
                 .cars(carsMapper.mapTo(object.getCars()))
-                .user(userMapper.mapTo(object.getUser()))
+                .description(object.getDescription())
+                .cost(object.getCost())
+                .serviceName(object.getServiceName())
                 .startDate(object.getStartDate())
                 .endDate(object.getEndDate())
-                .rentalsStatus(object.getRentalsStatus())
                 .createdAt(object.getCreatedAt())
                 .updatedAt(object.getUpdatedAt())
                 .build();
     }
 
     @Override
-    public RentalsDto mapFrom(Rentals object) {
-        return RentalsDto.builder()
+    public MaintenanceDto mapFrom(Maintenance object) {
+        return MaintenanceDto.builder()
                 .id(object.getId())
                 .cars(carsMapper.mapFrom(object.getCars()))
-                .user(userMapper.mapFrom(object.getUser()))
+                .description(object.getDescription())
+                .cost(object.getCost())
+                .serviceName(object.getServiceName())
                 .startDate(object.getStartDate())
                 .endDate(object.getEndDate())
-                .rentalsStatus(object.getRentalsStatus())
                 .createdAt(object.getCreatedAt())
                 .updatedAt(object.getUpdatedAt())
                 .build();

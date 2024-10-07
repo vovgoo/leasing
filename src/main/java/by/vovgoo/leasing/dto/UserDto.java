@@ -1,22 +1,24 @@
 package by.vovgoo.leasing.dto;
 
+import by.vovgoo.leasing.dto.baseDto.EditableDto;
 import by.vovgoo.leasing.entity.enums.Role;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class UserDto {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
+public class UserDto extends EditableDto<Long> {
+
     private Long id;
 
     private String username;
 
-    @JsonIgnore
     private String passwordHash;
 
     private String email;

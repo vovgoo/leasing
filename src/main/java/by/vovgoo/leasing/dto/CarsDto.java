@@ -1,16 +1,17 @@
 package by.vovgoo.leasing.dto;
 
+import by.vovgoo.leasing.dto.baseDto.EditableDto;
 import by.vovgoo.leasing.entity.enums.CarStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class CarsDto {
+@SuperBuilder
+public class CarsDto extends EditableDto<Long> {
+
     private Long id;
 
     private String make;

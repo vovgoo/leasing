@@ -1,16 +1,12 @@
 package by.vovgoo.leasing.controllers;
 
-import by.vovgoo.leasing.dto.JwtAuthResponse;
-import by.vovgoo.leasing.dto.RentalsPersonalDto;
-import by.vovgoo.leasing.entity.RentalsPersonal;
-import by.vovgoo.leasing.dto.SignInRequest;
+import by.vovgoo.leasing.dto.auth.JwtAuthResponse;
+import by.vovgoo.leasing.dto.auth.SignInRequest;
 import by.vovgoo.leasing.dto.UserDto;
 import by.vovgoo.leasing.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/auth")

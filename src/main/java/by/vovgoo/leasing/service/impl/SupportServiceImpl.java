@@ -1,7 +1,7 @@
 package by.vovgoo.leasing.service.impl;
 
 import by.vovgoo.leasing.dto.SupportDto;
-import by.vovgoo.leasing.dto.SupportRequest;
+import by.vovgoo.leasing.dto.pages.SupportPage.SupportRequest;
 import by.vovgoo.leasing.entity.Support;
 import by.vovgoo.leasing.entity.User;
 import by.vovgoo.leasing.mapper.SupportMapper;

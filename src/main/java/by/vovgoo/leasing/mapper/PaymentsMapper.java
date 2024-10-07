@@ -21,6 +21,8 @@ public class PaymentsMapper implements Mapper<Payments, PaymentsDto> {
                 .user(userMapper.mapTo(object.getUser()))
                 .amount(object.getAmount())
                 .paymentMethod(object.getPaymentMethod())
+                .createdAt(object.getCreatedAt())
+                .updatedAt(object.getUpdatedAt())
                 .build();
     }
 
@@ -32,6 +34,8 @@ public class PaymentsMapper implements Mapper<Payments, PaymentsDto> {
                 .user(userMapper.mapFrom(object.getUser()))
                 .amount(object.getAmount())
                 .paymentMethod(object.getPaymentMethod())
+                .createdAt(object.getCreatedAt())
+                .updatedAt(object.getUpdatedAt())
                 .build();
     }
 }

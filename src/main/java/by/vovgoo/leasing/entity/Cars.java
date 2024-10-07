@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @AllArgsConstructor
@@ -14,7 +15,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Table(name = "cars")
-@Builder
+@SuperBuilder
 public class Cars extends EditableEntity<Long> {
 
     @Id

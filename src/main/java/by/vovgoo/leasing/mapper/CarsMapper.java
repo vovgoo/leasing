@@ -20,6 +20,8 @@ public class CarsMapper implements Mapper<Cars, CarsDto> {
                 .carStatus(object.getCarStatus())
                 .description(object.getDescription())
                 .image(object.getImage())
+                .createdAt(object.getCreatedAt())
+                .updatedAt(object.getUpdatedAt())
                 .build();
     }
 
@@ -36,6 +38,8 @@ public class CarsMapper implements Mapper<Cars, CarsDto> {
                 .carStatus(object.getCarStatus())
                 .description(object.getDescription())
                 .image(object.getImage())
+                .createdAt(object.getCreatedAt())
+                .updatedAt(object.getUpdatedAt())
                 .build();
     }
 }

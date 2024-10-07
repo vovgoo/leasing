@@ -17,8 +17,8 @@ public class SupportMapper implements Mapper<Support, SupportDto> {
                 .id(object.getId())
                 .user(userMapper.mapTo(object.getUser()))
                 .subject(object.getSubject())
-                .createdAt(object.getCreated_at())
-                .updatedAt(object.getUpdated_at())
+                .createdAt(object.getCreatedAt())
+                .updatedAt(object.getUpdatedAt())
                 .build();
     }
 
@@ -28,8 +28,8 @@ public class SupportMapper implements Mapper<Support, SupportDto> {
                 .id(object.getId())
                 .user(userMapper.mapFrom(object.getUser()))
                 .subject(object.getSubject())
-                .created_at(object.getCreatedAt())
-                .updated_at(object.getUpdatedAt())
+                .createdAt(object.getCreatedAt())
+                .updatedAt(object.getUpdatedAt())
                 .build();
     }
 }

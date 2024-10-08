@@ -2,6 +2,8 @@ package by.vovgoo.leasing.controllers;
 
 import by.vovgoo.leasing.dto.pages.CarInfoPage.CarsInfoPage;
 import by.vovgoo.leasing.dto.pages.MainPage.MainPageDto;
+import by.vovgoo.leasing.dto.pages.SearchPage.SearchPageDto;
+import by.vovgoo.leasing.entity.filters.CarsFilter;
 import by.vovgoo.leasing.service.CarsService;
 import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
@@ -23,5 +25,10 @@ public class CarsController {
     @GetMapping("/mainPage")
     public MainPageDto getMainPage() {
         return carsService.getMainPage();
+    }
+
+    @GetMapping("/searchPage")
+    public SearchPageDto getSearchPage() {
+        return carsService.getSearchPage();
     }
 }

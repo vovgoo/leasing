@@ -1,6 +1,5 @@
 package by.vovgoo.leasing.repositories;
 
-import by.vovgoo.leasing.dto.pages.MainPage.PriceRange;
 import by.vovgoo.leasing.entity.Cars;
 import jakarta.persistence.Tuple;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -40,4 +39,20 @@ public interface CarsRepository extends JpaRepository<Cars, Long>, QuerydslPredi
                END;
         """, nativeQuery = true)
     List<Tuple> getCarsBounds();
+
+    @Query(value = """
+            (SELECT DISTINCT 'make' AS category, c.make AS value FROM Cars c)
+            UNION ALL
+            (SELECT DISTINCT 'year' AS category, CAST(c.year AS VARCHAR) AS value FROM Cars c)
+            UNION ALL
+            (SELECT DISTINCT 'color' AS category, c.color AS value FROM Cars c)
+            UNION ALL
+            (SELECT DISTINCT 'car_status' AS category, c.car_status AS value FROM Cars c)
+            UNION ALL
+            SELECT 'priceUpper' AS category,  CAST(MAX(c.price) AS VARCHAR) FROM Cars c
+            UNION ALL
+            SELECT 'priceDown' AS category, CAST(MIN(c.price) AS VARCHAR) FROM Cars c
+            ORDER BY category, value;
+    """, nativeQuery = true)
+    List<Tuple> getCarsCriteria();
 }

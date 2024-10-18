@@ -1,6 +1,7 @@
 package by.vovgoo.leasing.dto.pages.OrderPersonalPage;
 
 import by.vovgoo.leasing.dto.PaymentsDto;
+import by.vovgoo.leasing.entity.enums.CarColor;
 import by.vovgoo.leasing.entity.enums.CarStatus;
 import by.vovgoo.leasing.entity.enums.PaymentMethod;
 import by.vovgoo.leasing.entity.enums.RentalsStatus;
@@ -38,7 +39,7 @@ public class OrderPersonaPageDto {
 
         private Integer year;
 
-        private String color;
+        private CarColor color;
 
         private Double mileage;
 

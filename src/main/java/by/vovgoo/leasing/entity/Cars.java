@@ -1,6 +1,7 @@
 package by.vovgoo.leasing.entity;
 
 import by.vovgoo.leasing.entity.baseEntity.EditableEntity;
+import by.vovgoo.leasing.entity.enums.CarColor;
 import by.vovgoo.leasing.entity.enums.CarStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -33,7 +34,8 @@ public class Cars extends EditableEntity<Long> {
     private Integer year;
 
     @NotBlank
-    private String color;
+    @Enumerated(EnumType.STRING)
+    private CarColor color;
 
     @NotBlank
     private Double mileage;

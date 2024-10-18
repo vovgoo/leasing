@@ -17,7 +17,7 @@ public interface CarsRepository extends JpaRepository<Cars, Long>, QuerydslPredi
 
 
     @Query(value = """
-       SELECT MAX(price) AS max_price, MIN(price) AS min_price, price_group
+       SELECT MAX(price) AS max_price, MIN(price) AS min_price, COUNT(*) as count, price_group
        FROM (
                 SELECT price,
                        CASE

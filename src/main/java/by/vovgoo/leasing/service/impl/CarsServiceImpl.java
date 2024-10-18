@@ -1,5 +1,6 @@
 package by.vovgoo.leasing.service.impl;
 
+import by.vovgoo.leasing.dto.CarsDto;
 import by.vovgoo.leasing.dto.pages.CarInfoPage.CarsInfoPage;
 import by.vovgoo.leasing.dto.pages.MainPage.CarsBounds;
 import by.vovgoo.leasing.dto.pages.MainPage.MainPageDto;
@@ -7,6 +8,8 @@ import by.vovgoo.leasing.dto.pages.MainPage.PriceRange;
 import by.vovgoo.leasing.dto.pages.SearchPage.SearchPageDto;
 import by.vovgoo.leasing.dto.pages.utils.PageResponse;
 import by.vovgoo.leasing.entity.enums.CarStatus;
+import by.vovgoo.leasing.entity.filters.CarsFilter;
+import by.vovgoo.leasing.entity.filters.QPredicates;
 import by.vovgoo.leasing.mapper.CarsMapper;
 import by.vovgoo.leasing.repositories.CarsRepository;
 import by.vovgoo.leasing.service.CarsService;
@@ -14,7 +17,11 @@ import by.vovgoo.leasing.service.MaintenanceService;
 import jakarta.persistence.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import static by.vovgoo.leasing.entity.QCars.cars;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +45,7 @@ public class CarsServiceImpl implements CarsService {
                 .build();
     }
 
-    @Override
-    public MainPageDto getMainPage() {
-
+    private CarsBounds getCarsBounds() {
         List<Tuple> priceRanges = carsRepository.getCarsBounds();
 
         PriceRange lowPriceRange = null;
@@ -50,9 +55,10 @@ public class CarsServiceImpl implements CarsService {
         for (Tuple tuple : priceRanges) {
             Double minPrice = tuple.get(1, Double.class);
             Double maxPrice = tuple.get(0, Double.class);
-            String priceGroup = tuple.get(2, String.class);
+            Long count = tuple.get(2, Long.class);
+            String priceGroup = tuple.get(3, String.class);
 
-            PriceRange currentRange = new PriceRange(minPrice, maxPrice);
+            PriceRange currentRange = new PriceRange(minPrice, maxPrice, count);
 
             switch (priceGroup) {
                 case "low":
@@ -67,15 +73,21 @@ public class CarsServiceImpl implements CarsService {
             }
         }
 
+        return CarsBounds.builder()
+                .lowPriceRange(lowPriceRange != null ? lowPriceRange : new PriceRange(0D, 0D, 0L))
+                .mediumPriceRange(mediumPriceRange != null ? mediumPriceRange : new PriceRange(0D, 0D,0L))
+                .highPriceRange(highPriceRange != null ? highPriceRange : new PriceRange(0D, 0D,0L))
+                .build();
+    }
+
+    @Override
+    public MainPageDto getMainPage() {
+
         return MainPageDto.builder()
                 .cars(carsRepository.getMostPopularCars().stream()
                         .map(carsMapper::mapFrom)
                         .toList())
-                .carsBounds(CarsBounds.builder()
-                        .lowPriceRange(lowPriceRange != null ? lowPriceRange : new PriceRange(0D, 0D))
-                        .mediumPriceRange(mediumPriceRange != null ? mediumPriceRange : new PriceRange(0D, 0D))
-                        .highPriceRange(highPriceRange != null ? highPriceRange : new PriceRange(0D, 0D))
-                        .build())
+                .carsBounds(getCarsBounds())
                 .build();
     }
 
@@ -158,7 +170,25 @@ public class CarsServiceImpl implements CarsService {
         return SearchPageDto.builder()
                 .criteria(criteria)
                 .cars(PageResponse.of(carsRepository.findAll(PageRequest.of(0, 12)).map(carsMapper::mapFrom)))
+                .carsBounds(getCarsBounds())
                 .build();
     }
+
+    @Override
+    public PageResponse<CarsDto> findAll(CarsFilter filter, Pageable pageable) {
+        var predicate = QPredicates.builder()
+                .add(filter.carName(), name -> cars.make.containsIgnoreCase(name)
+                        .or(cars.model.containsIgnoreCase(name)))
+                .add(filter.make(), cars.make::in)
+                .add(filter.year(), cars.year::in)
+                .add(filter.color(), cars.color::in)
+                .add(filter.priceDown(), cars.price::goe)
+                .add(filter.priceUpper(), cars.price::loe)
+                .add(filter.carStatus(), cars.carStatus::in)
+                .build();
+
+        return PageResponse.of(carsRepository.findAll(predicate, PageRequest.of(pageable.getPageNumber(), 12)).map(carsMapper::mapFrom));
+    }
+
 
 }

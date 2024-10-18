@@ -1,6 +1,7 @@
 package by.vovgoo.leasing.dto;
 
 import by.vovgoo.leasing.dto.baseDto.EditableDto;
+import by.vovgoo.leasing.entity.enums.CarColor;
 import by.vovgoo.leasing.entity.enums.CarStatus;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -20,7 +21,7 @@ public class CarsDto extends EditableDto<Long> {
 
     private Integer year;
 
-    private String color;
+    private CarColor color;
 
     private Double mileage;
 

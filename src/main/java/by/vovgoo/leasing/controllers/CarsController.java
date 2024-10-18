@@ -1,13 +1,17 @@
 package by.vovgoo.leasing.controllers;
 
+import by.vovgoo.leasing.dto.CarsDto;
 import by.vovgoo.leasing.dto.pages.CarInfoPage.CarsInfoPage;
 import by.vovgoo.leasing.dto.pages.MainPage.MainPageDto;
 import by.vovgoo.leasing.dto.pages.SearchPage.SearchPageDto;
+import by.vovgoo.leasing.dto.pages.utils.PageResponse;
 import by.vovgoo.leasing.entity.filters.CarsFilter;
 import by.vovgoo.leasing.service.CarsService;
 import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,5 +34,10 @@ public class CarsController {
     @GetMapping("/searchPage")
     public SearchPageDto getSearchPage() {
         return carsService.getSearchPage();
+    }
+
+    @GetMapping("/search")
+    public PageResponse<CarsDto> searchCars(CarsFilter carsFilter, Pageable pageable) {
+        return carsService.findAll(carsFilter, pageable);
     }
 }

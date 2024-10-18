@@ -14,5 +14,7 @@ public class PriceRange {
     private Double lowerBound;
 
     private Double upperBound;
+
+    private Long count;
 }
 

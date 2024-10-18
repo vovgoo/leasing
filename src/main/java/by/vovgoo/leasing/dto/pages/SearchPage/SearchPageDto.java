@@ -1,6 +1,7 @@
 package by.vovgoo.leasing.dto.pages.SearchPage;
 
 import by.vovgoo.leasing.dto.CarsDto;
+import by.vovgoo.leasing.dto.pages.MainPage.CarsBounds;
 import by.vovgoo.leasing.dto.pages.utils.PageResponse;
 import by.vovgoo.leasing.entity.enums.CarStatus;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,8 @@ public class SearchPageDto {
     private Criteria criteria;
 
     private PageResponse<CarsDto> cars;
+
+    private CarsBounds carsBounds;
 
     @Component
     @Data
